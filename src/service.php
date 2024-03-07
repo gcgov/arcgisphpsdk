@@ -58,14 +58,6 @@ class service {
 		return $roads;
 	}
 
-	private function _doGetRoads(int $offset=0, int $featuresPerCall=1000) {
-		$url = config::getBaseUrl().'Addresses/Garrett_Centerlines/FeatureServer/1/query?f=geojson&where=1%3D1&outfields=*&returnGeometry=false&returnOffset='.$offset.'&resultRecordCount='.$featuresPerCall;
-		$client = new \GuzzleHttp\Client();
-		$res = $client->request('GET', $url );
-		$roadFeatureCollection = featureCollection::jsonDeserialize($res->getBody());
-		return $roadFeatureCollection;
-	}
-
 	/**
 	 * @return string[]
 	 * @throws \GuzzleHttp\Exception\GuzzleException
