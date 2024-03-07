@@ -13,8 +13,8 @@ class featureCollection extends jsonDeserialize {
 
 	public ?featureCollectionProperties $properties = null;
 
-
 	public bool $exceededTransferLimit = false;
+
 
 	public function __construct( ?string $type = null, array $features = [] ) {
 		$this->type = $type;

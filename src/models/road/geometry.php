@@ -4,12 +4,15 @@ namespace gcgov\arcgis\models\road;
 
 use andrewsauder\jsonDeserialize\jsonDeserialize;
 
-class geometry extends jsonDeserialize  {
-	public ?string $type = '';
-	public array $coordinates = [];
+class geometry extends jsonDeserialize {
 
-	public function __construct(string $type='', array $coordinates=[]) {
-		$this->type = $type;
+	public ?string $type        = '';
+	public array   $coordinates = [];
+
+
+	public function __construct( string $type = '', array $coordinates = [] ) {
+		$this->type        = $type;
 		$this->coordinates = $coordinates;
 	}
+
 }

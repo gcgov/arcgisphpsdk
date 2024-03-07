@@ -2,7 +2,6 @@
 
 namespace gcgov\arcgis;
 
-
 final class config {
 
 	private static string $baseUrl = 'https://gis.garrettcounty.org/server/rest/services/';

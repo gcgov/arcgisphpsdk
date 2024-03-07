@@ -17,46 +17,47 @@ class service {
 	 * @throws \andrewsauder\jsonDeserialize\exceptions\jsonDeserializeException
 	 */
 	public function getRoadsCount(): int {
-		$url = config::getBaseUrl().'Addresses/Garrett_Centerlines/FeatureServer/1/query?f=geojson&where=1%3D1&outfields=*&returnGeometry=false&returnCountOnly=true';
+		$url = config::getBaseUrl() . 'Addresses/Garrett_Centerlines/FeatureServer/1/query?f=geojson&where=1%3D1&outfields=*&returnGeometry=false&returnCountOnly=true';
 
-		$client = new \GuzzleHttp\Client();
-		$countGuzzleResponse = $client->request('GET', $url );
+		$client              = new \GuzzleHttp\Client();
+		$countGuzzleResponse = $client->request( 'GET', $url );
 
-		$countFeatureCollection = featureCollection::jsonDeserialize($countGuzzleResponse->getBody());
+		$countFeatureCollection = featureCollection::jsonDeserialize( $countGuzzleResponse->getBody() );
 
 		return $countFeatureCollection->properties->count;
 	}
 
 
 	/**
-	 * @param int   $offset
-	 * @param int   $featuresPerCall
+	 * @param int                                           $offset
+	 * @param int                                           $featuresPerCall
 	 * @param \gcgov\arcgis\models\road\featureCollection[] $roadFeatureCollections
 	 *
 	 * @return \gcgov\arcgis\models\road[]
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 * @throws \andrewsauder\jsonDeserialize\exceptions\jsonDeserializeException
 	 */
-	public function getRoads(int $offset=0, int $featuresPerCall=1000, array $roadFeatureCollections=[]): array {
+	public function getRoads( int $offset = 0, int $featuresPerCall = 1000, array $roadFeatureCollections = [] ): array {
 
-		$url = config::getBaseUrl().'Addresses/Garrett_Centerlines/FeatureServer/1/query?f=geojson&where=1%3D1&outfields=*&returnGeometry=false&resultOffset='.$offset.'&resultRecordCount='.$featuresPerCall;
-		$client = new \GuzzleHttp\Client();
-		$res = $client->request('GET', $url );
-		$roadFeatureCollection = featureCollection::jsonDeserialize($res->getBody());
+		$url                   = config::getBaseUrl() . 'Addresses/Garrett_Centerlines/FeatureServer/1/query?f=geojson&where=1%3D1&outfields=*&returnGeometry=false&resultOffset=' . $offset . '&resultRecordCount=' . $featuresPerCall;
+		$client                = new \GuzzleHttp\Client();
+		$res                   = $client->request( 'GET', $url );
+		$roadFeatureCollection = featureCollection::jsonDeserialize( $res->getBody() );
 
-		$roadFeatureCollections[] =$roadFeatureCollection;
+		$roadFeatureCollections[] = $roadFeatureCollection;
 
-		if($roadFeatureCollection->exceededTransferLimit) {
-			return $this->getRoads( $offset+$featuresPerCall, $featuresPerCall, $roadFeatureCollections);
+		if( $roadFeatureCollection->exceededTransferLimit ) {
+			return $this->getRoads( $offset + $featuresPerCall, $featuresPerCall, $roadFeatureCollections );
 		}
 
 		$roads = [];
-		foreach($roadFeatureCollections as $roadFeatureCollection) {
+		foreach( $roadFeatureCollections as $roadFeatureCollection ) {
 			$roads = array_merge( $roads, $roadFeatureCollection->features );
 		}
 
 		return $roads;
 	}
+
 
 	/**
 	 * @return string[]
@@ -64,13 +65,14 @@ class service {
 	 * @throws \andrewsauder\jsonDeserialize\exceptions\jsonDeserializeException
 	 */
 	public function getRoadNames(): array {
-		$roads = $this->getRoads();
+		$roads     = $this->getRoads();
 		$roadNames = [];
-		foreach($roads as $road) {
+		foreach( $roads as $road ) {
 			$roadNames[] = $road->properties->RDNAMELOCAL;
 		}
-		$roadNames = array_unique($roadNames);
-		sort($roadNames);
+		$roadNames = array_unique( $roadNames );
+		sort( $roadNames );
 		return $roadNames;
 	}
+
 }
