@@ -10,15 +10,6 @@
 	"require": {
 		"php": ">=8.1",
 		"guzzlehttp/guzzle": "^7.8",
-		"andrewsauder/json-deserialize": "dev-main"
-	},
-	"repositories": [
-		{
-			"type": "path",
-			"url": "C:/inetpub/www/packages/jsonDeserialize/",
-			"options": {
-				"symlink": true
-			}
-		}
-	]
+		"andrewsauder/json-deserialize": "^2.5.3"
+	}
 }
