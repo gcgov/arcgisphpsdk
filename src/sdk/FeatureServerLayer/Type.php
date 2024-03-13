@@ -11,8 +11,9 @@ class Type extends jsonDeserialize {
 
 	public ?string $name = null;
 
-	/** @var array<string, \gcgov\arcgis\sdk\FeatureServerLayer\Domain> */
+	/** @var array<string, \gcgov\arcgis\sdk\FeatureServerLayer\Domain> $domains */
 	public ?array $domains = [];
+
 	public ?int   $id      = null;
 
 

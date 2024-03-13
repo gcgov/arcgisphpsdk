@@ -33,7 +33,7 @@ class Token extends jsonDeserialize {
 			]
 		] );
 
-		return \gcgov\arcgis\models\token::jsonDeserialize( $res->getBody() );
+		return \gcgov\arcgis\sdk\Token::jsonDeserialize( $res->getBody() );
 	}
 
 }

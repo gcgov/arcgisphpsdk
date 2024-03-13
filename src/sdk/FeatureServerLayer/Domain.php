@@ -10,6 +10,8 @@ class Domain extends jsonDeserialize {
 	public ?string $name        = null;
 	public ?string $description = null;
 	public ?string $type        = null;
+
+	/** @var \gcgov\arcgis\sdk\FeatureServerLayer\CodedValue[] $codedValues */
 	public ?array  $codedValues = null;
 	public ?string $mergePolicy = null;
 

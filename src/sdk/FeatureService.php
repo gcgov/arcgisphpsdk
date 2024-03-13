@@ -27,7 +27,7 @@ class FeatureService {
 	public function getFeatureServer(): FeatureServer {
 		if( !isset( $this->featureServer ) ) {
 			$token               = $this->config->getToken();
-			$url                 = $this->getServiceUrl();
+			$url                 = $this->getServiceUrl('?f=json&token='.$token);
 			$client              = new \GuzzleHttp\Client();
 			$res                 = $client->request( 'GET', $url );
 			$this->featureServer = \gcgov\arcgis\sdk\FeatureServer::jsonDeserialize( $res->getBody() );
@@ -43,7 +43,7 @@ class FeatureService {
 	public function getFeatureServerLayer( int|string $layerId = 0 ): FeatureServerLayer {
 		if( !isset( $this->featureServerLayers[ $layerId ] ) ) {
 			$token                                 = $this->config->getToken();
-			$url                                   = $this->getServiceUrl( $layerId );
+			$url                                   = $this->getServiceUrl( $layerId.'?f=json&token='.$token );
 			$client                                = new \GuzzleHttp\Client();
 			$res                                   = $client->request( 'GET', $url );
 			$this->featureServerLayers[ $layerId ] = \gcgov\arcgis\sdk\FeatureServerLayer::jsonDeserialize( $res->getBody() );

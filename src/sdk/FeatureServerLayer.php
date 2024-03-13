@@ -18,6 +18,7 @@ class FeatureServerLayer extends jsonDeserialize {
 	public ?bool   $isDataBranchVersioned           = null;
 	public ?bool   $supportsApplyEditsWithGlobalIds = null;
 	public ?int    $maxRecordCount                  = null;
+
 	/** @var ?\gcgov\arcgis\sdk\FeatureServerLayer\AttachmentProperty[] $attachmentProperties */
 	public ?array $attachmentProperties = [];
 
@@ -25,7 +26,8 @@ class FeatureServerLayer extends jsonDeserialize {
 	public ?array $attachmentFields = [];
 
 	/** @var ?string[] $infoInEstimates */
-	public ?array                       $infoInEstimates                             = [];
+	public ?array $infoInEstimates = [];
+
 	public ?bool                        $datesInUnknownTimezone                      = null;
 	public ?string                      $type                                        = null;
 	public ?bool                        $onlyAllowTrueCurveUpdatesByTrueCurveClients = null;
@@ -85,6 +87,7 @@ class FeatureServerLayer extends jsonDeserialize {
 	public ?string                    $serviceItemId                   = null;
 	public ?bool                      $allowUpdateWithoutMValues       = null;
 	public ?bool                      $supportsCoordinatesQuantization = null;
+
 	/** @var ?\gcgov\arcgis\sdk\FeatureServerLayer\Type[] */
 	public ?array $types = [];
 
