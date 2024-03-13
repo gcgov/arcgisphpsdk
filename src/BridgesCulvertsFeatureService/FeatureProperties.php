@@ -71,7 +71,7 @@ class FeatureProperties extends jsonDeserialize {
 	public ?int    $culver_sk                    = null;
 	public ?float  $upstream_cd                  = null;
 	public ?float  $curb_curb                    = null;
-	public ?string $year_1                       = null;
+	public ?int    $year_1                       = null;
 	public ?float  $lat                          = null;
 	public ?float  $longitude                    = null;
 	public ?string $created_user                 = null;
@@ -110,7 +110,7 @@ class FeatureProperties extends jsonDeserialize {
 	public ?int    $field_verification           = null;
 	public ?float  $strut_tidastrut_tida         = null;
 	public ?string $inspection_2                 = null;
-	public ?string $created_date                 = null;
+	public ?int    $created_date                 = null;
 	public ?int    $objectid                     = null;
 
 }
