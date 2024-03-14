@@ -7,7 +7,7 @@ use gcgov\arcgis\sdk\FeatureService;
 class BridgesCulvertsFeatureService extends FeatureService {
 
 	public function __construct( config $config ) {
-		parent::__construct( $config, $config->getBaseUrl( 'server/rest/services/Hosted/Bridges_and_Culverts/FeatureServer/' ) );
+		parent::__construct( $config, $config->getBaseUrl( 'server/rest/services/Hosted/DEVELOPMENT_Bridges_and_Culverts/FeatureServer/'), $config->getBaseUrl( 'server/rest/admin/services/Hosted/DEVELOPMENT_Bridges_and_Culverts/FeatureServer/' ) );
 	}
 
 

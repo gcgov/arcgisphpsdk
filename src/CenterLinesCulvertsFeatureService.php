@@ -7,7 +7,7 @@ use gcgov\arcgis\sdk\FeatureService;
 class CenterLinesCulvertsFeatureService extends FeatureService {
 
 	public function __construct( config $config ) {
-		parent::__construct( $config, $config->getBaseUrl( 'server/rest/services/Addresses/Garrett_Centerlines/FeatureServer/' ) );
+		parent::__construct( $config, $config->getBaseUrl( 'server/rest/services/Addresses/Garrett_Centerlines/FeatureServer/' ), $config->getBaseUrl( 'server/rest/admin/services/Addresses/Garrett_Centerlines/FeatureServer/' ) );
 	}
 
 
