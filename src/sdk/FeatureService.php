@@ -86,11 +86,11 @@ class FeatureService {
 	 * @param \gcgov\arcgis\sdk\Feature[] $features
 	 * @param int|string                                   $layerId
 	 *
-	 * @return \gcgov\arcgis\sdk\UpdateDefinition
+	 * @return array
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 * @throws \andrewsauder\jsonDeserialize\exceptions\jsonDeserializeException
 	 */
-	public function updateFeatures( array $features, int|string $layerId = 0 ): string {
+	public function updateFeatures( array $features, int|string $layerId = 0 ): array {
 
 		$updateFeatures = [];
 		foreach($features as $feature) {
@@ -109,7 +109,7 @@ class FeatureService {
 		];
 		$res         = $client->request( 'POST', $url, $postOptions );
 
-		return (string)$res->getBody();
+		return json_decode($res->getBody(), true);
 	}
 
 
