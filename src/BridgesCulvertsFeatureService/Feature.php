@@ -8,6 +8,13 @@ class Feature extends \gcgov\arcgis\sdk\Feature {
 
 
 	public function __construct() {
+		parent::__construct();
+		$this->properties = new FeatureProperties();
+	}
+
+
+	public function getProperties(): ?FeatureProperties {
+		return $this->properties;
 	}
 
 }

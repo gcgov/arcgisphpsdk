@@ -82,6 +82,37 @@ class FeatureService {
 	}
 
 
+	/**
+	 * @param \gcgov\arcgis\sdk\Feature[] $features
+	 * @param int|string                                   $layerId
+	 *
+	 * @return \gcgov\arcgis\sdk\UpdateDefinition
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 * @throws \andrewsauder\jsonDeserialize\exceptions\jsonDeserializeException
+	 */
+	public function updateFeatures( array $features, int|string $layerId = 0 ): string {
+
+		$updateFeatures = [];
+		foreach($features as $feature) {
+			$updateFeatures[] = UpdateFeature::fromFeature( $feature );
+		}
+
+		$token       = $this->config->getToken();
+		$url         = $this->getServiceUrl( $layerId . '/updateFeatures' );
+		$client      = new \GuzzleHttp\Client();
+		$postOptions = [
+			'form_params' => [
+				'features' => json_encode( $updateFeatures ),
+				'f'                => 'json',
+				'token'            => $token
+			]
+		];
+		$res         = $client->request( 'POST', $url, $postOptions );
+
+		return (string)$res->getBody();
+	}
+
+
 	public function getServiceUrl( string $append = '' ): string {
 		return rtrim( $this->serviceUrl, '/' ) . '/' . ltrim( $append, '/' );
 	}

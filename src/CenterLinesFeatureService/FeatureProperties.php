@@ -1,10 +1,9 @@
 <?php
 
-namespace gcgov\arcgis\CenterLinessFeatureService;
+namespace gcgov\arcgis\CenterLinesFeatureService;
 
-use andrewsauder\jsonDeserialize\jsonDeserialize;
 
-class FeatureProperties extends jsonDeserialize {
+class FeatureProperties extends \gcgov\arcgis\sdk\FeatureProperties {
 
 	public ?int    $OBJECTID               = null;
 	public ?string $NLFID                  = null;

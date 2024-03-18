@@ -2,9 +2,8 @@
 
 namespace gcgov\arcgis\BridgesCulvertsFeatureService;
 
-use andrewsauder\jsonDeserialize\jsonDeserialize;
 
-class FeatureProperties extends jsonDeserialize {
+class FeatureProperties extends \gcgov\arcgis\sdk\FeatureProperties {
 
 	public ?float  $downstream_tw                = null;
 	public ?float  $atstr_fd                     = null;
