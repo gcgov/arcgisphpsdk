@@ -9,4 +9,10 @@ interface IFeature {
 
 	public function getProperties(): ?\gcgov\arcgis\sdk\FeatureProperties;
 
+
+	public function getObjectId(): ?int;
+
+
+	public function getGlobalId(): ?string;
+
 }

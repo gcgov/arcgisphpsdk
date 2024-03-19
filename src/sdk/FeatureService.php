@@ -84,16 +84,16 @@ class FeatureService {
 
 	/**
 	 * @param \gcgov\arcgis\sdk\Feature[] $features
-	 * @param int|string                                   $layerId
+	 * @param int|string                  $layerId
 	 *
-	 * @return array
+	 * @return \gcgov\arcgis\sdk\Response\UpdateFeature
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 * @throws \andrewsauder\jsonDeserialize\exceptions\jsonDeserializeException
 	 */
-	public function updateFeatures( array $features, int|string $layerId = 0 ): array {
+	public function updateFeatures( array $features, int|string $layerId = 0 ): Response\UpdateFeature {
 
 		$updateFeatures = [];
-		foreach($features as $feature) {
+		foreach( $features as $feature ) {
 			$updateFeatures[] = UpdateFeature::fromFeature( $feature );
 		}
 
@@ -103,13 +103,78 @@ class FeatureService {
 		$postOptions = [
 			'form_params' => [
 				'features' => json_encode( $updateFeatures ),
-				'f'                => 'json',
-				'token'            => $token
+				'f'        => 'json',
+				'token'    => $token
 			]
 		];
 		$res         = $client->request( 'POST', $url, $postOptions );
 
-		return json_decode($res->getBody(), true);
+		return Response\UpdateFeature::jsonDeserialize( $res->getBody() );
+	}
+
+
+	/**
+	 * @param \gcgov\arcgis\sdk\Feature[] $features
+	 * @param int|string                  $layerId
+	 *
+	 * @return \gcgov\arcgis\sdk\Response\AddFeature
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 * @throws \andrewsauder\jsonDeserialize\exceptions\jsonDeserializeException
+	 */
+	public function addFeatures( array $features, int|string $layerId = 0 ): Response\AddFeature {
+
+		$addFeatures = [];
+		foreach( $features as $feature ) {
+			$addFeatures[] = AddFeature::fromFeature( $feature );
+		}
+
+		$token       = $this->config->getToken();
+		$url         = $this->getServiceUrl( $layerId . '/addFeatures' );
+		$client      = new \GuzzleHttp\Client();
+		$postOptions = [
+			'form_params' => [
+				'features' => json_encode( $addFeatures ),
+				'f'        => 'json',
+				'token'    => $token
+			]
+		];
+		$res         = $client->request( 'POST', $url, $postOptions );
+
+		return Response\AddFeature::jsonDeserialize( $res->getBody() );
+	}
+
+
+	/**
+	 * @param \gcgov\arcgis\sdk\Feature[] $features
+	 * @param int|string                  $layerId
+	 *
+	 * @return \gcgov\arcgis\sdk\Response\DeleteFeature
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 * @throws \andrewsauder\jsonDeserialize\exceptions\jsonDeserializeException
+	 */
+	public function deleteFeatures( array $features, int|string $layerId = 0 ): Response\DeleteFeature {
+
+		$deleteFeatureObjectIds = [];
+		foreach( $features as $feature ) {
+			$objectId = $feature->getObjectId();
+			if( $objectId!==null ) {
+				$deleteFeatureObjectIds[] = $feature->getObjectId();
+			}
+		}
+
+		$token       = $this->config->getToken();
+		$url         = $this->getServiceUrl( $layerId . '/addFeatures' );
+		$client      = new \GuzzleHttp\Client();
+		$postOptions = [
+			'form_params' => [
+				'objectIds' => implode( ', ', $deleteFeatureObjectIds ),
+				'f'         => 'json',
+				'token'     => $token
+			]
+		];
+		$res         = $client->request( 'POST', $url, $postOptions );
+
+		return Response\DeleteFeature::jsonDeserialize( $res->getBody() );
 	}
 
 
