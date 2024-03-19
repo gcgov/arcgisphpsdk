@@ -58,11 +58,11 @@ class FeatureService {
 	 * @param \gcgov\arcgis\sdk\FeatureServerLayer\Field[] $featureServerLayerFieldDefinitions
 	 * @param int|string                                   $layerId
 	 *
-	 * @return \gcgov\arcgis\sdk\UpdateDefinition
+	 * @return \gcgov\arcgis\sdk\Response\UpdateDefinition
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 * @throws \andrewsauder\jsonDeserialize\exceptions\jsonDeserializeException
 	 */
-	public function updateFeatureServerLayerFields( array $featureServerLayerFieldDefinitions, int|string $layerId = 0 ): UpdateDefinition {
+	public function updateFeatureLayerFields( array $featureServerLayerFieldDefinitions, int|string $layerId = 0 ): Response\UpdateDefinition {
 
 		$token       = $this->config->getToken();
 		$url         = $this->getAdminServiceUrl( $layerId . '/updateDefinition' );
@@ -78,7 +78,33 @@ class FeatureService {
 
 		$featureServerLayer = $this->getFeatureServerLayer( $layerId, true );
 
-		return UpdateDefinition::jsonDeserialize( $res->getBody() );
+		return Response\UpdateDefinition::jsonDeserialize( $res->getBody() );
+	}
+
+
+	/**
+	 * @param \gcgov\arcgis\sdk\FeatureServerLayer\Field[] $featureLayerFieldDefinitions
+	 * @param int|string                                   $layerId
+	 *
+	 * @return \gcgov\arcgis\sdk\Response\AddDefinition
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 * @throws \andrewsauder\jsonDeserialize\exceptions\jsonDeserializeException
+	 */
+	public function addFeatureLayerFields( array $featureLayerFieldDefinitions, int|string $layerId = 0 ): Response\AddDefinition {
+
+		$token       = $this->config->getToken();
+		$url         = $this->getAdminServiceUrl( $layerId . '/addToDefinition' );
+		$client      = new \GuzzleHttp\Client();
+		$postOptions = [
+			'form_params' => [
+				'addToDefinition' => json_encode( [ 'fields' => $featureLayerFieldDefinitions ] ),
+				'f'               => 'json',
+				'token'           => $token
+			]
+		];
+		$res         = $client->request( 'POST', $url, $postOptions );
+
+		return Response\AddDefinition::jsonDeserialize( $res->getBody() );
 	}
 
 
