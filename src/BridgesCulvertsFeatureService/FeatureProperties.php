@@ -44,7 +44,7 @@ class FeatureProperties extends \gcgov\arcgis\sdk\FeatureProperties {
 	public ?float  $cell_height                   = null;
 	public ?string $bridge_number                 = null;
 	public ?float  $atstr_cd                      = null;
-	public ?string $last_edited_date              = null;
+	public ?int    $last_edited_date              = null;
 	public ?float  $downstream_cd                 = null;
 	public ?float  $operating_weight              = null;
 	public ?int    $upstream_fw                   = null;
