@@ -8,6 +8,7 @@ class Geometry extends jsonDeserialize {
 
 	public ?float $x = null;
 	public ?float $y = null;
+	public array  $spatialReference = [ "wkid" => 4326 ];
 
 	public function __construct() {
 	}

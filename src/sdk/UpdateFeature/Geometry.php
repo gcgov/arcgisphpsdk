@@ -6,13 +6,16 @@ use andrewsauder\jsonDeserialize\jsonDeserialize;
 
 class Geometry extends jsonDeserialize {
 
-	public ?float $x = null;
-	public ?float $y = null;
+	public ?float $x                = null;
+	public ?float $y                = null;
+	public array  $spatialReference = [ "wkid" => 4326 ];
+
 
 	public function __construct() {
 	}
 
-	public static function fromFeatureGeometry(?\gcgov\arcgis\sdk\Feature\Geometry $geometry=null): self {
+
+	public static function fromFeatureGeometry( ?\gcgov\arcgis\sdk\Feature\Geometry $geometry = null ): self {
 		$updateGeometry = new Geometry();
 		if( isset( $geometry?->coordinates[ 0 ] ) ) {
 			$updateGeometry->x = $geometry?->coordinates[ 0 ];

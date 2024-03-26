@@ -189,7 +189,7 @@ class FeatureService {
 		}
 
 		$token       = $this->config->getToken();
-		$url         = $this->getServiceUrl( $layerId . '/addFeatures' );
+		$url         = $this->getServiceUrl( $layerId . '/deleteFeatures' );
 		$client      = new \GuzzleHttp\Client();
 		$postOptions = [
 			'form_params' => [
