@@ -7,7 +7,7 @@ use gcgov\arcgis\sdk\Interfaces\IFeature;
 
 abstract class Feature extends jsonDeserialize implements IFeature {
 
-	public ?string                             $type     = '';
+	public ?string                             $type     = 'Feature';
 	public ?int                                $id       = null;
 	public ?\gcgov\arcgis\sdk\Feature\Geometry $geometry = null;
 
