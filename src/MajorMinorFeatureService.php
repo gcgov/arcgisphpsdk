@@ -7,7 +7,16 @@ use gcgov\arcgis\sdk\FeatureService;
 class MajorMinorFeatureService extends FeatureService {
 
 	public function __construct( config $config ) {
-		parent::__construct( $config, $config->getBaseUrl( 'server/rest/services/Hosted/Major_and_Minor_Structures/FeatureServer/'), $config->getBaseUrl( 'server/rest/admin/services/Hosted/Major_and_Minor_Structures/FeatureServer/' ) );
+		if($config->isDevelopment()) {
+			$serviceUrl = $config->getBaseUrl( 'server/rest/services/Hosted/Major_and_Minor_Structures/FeatureServer/');
+			$adminUrl = $config->getBaseUrl( 'server/rest/admin/services/Hosted/Major_and_Minor_Structures/FeatureServer/' );
+		}
+		else {
+			$serviceUrl = $config->getBaseUrl( 'server/rest/services/Hosted/DEVELOPMENT_Major_and_Minor_Structures/FeatureServer/');
+			$adminUrl = $config->getBaseUrl( 'server/rest/admin/services/Hosted/DEVELOPMENT_Major_and_Minor_Structures/FeatureServer/' );
+		}
+
+		parent::__construct( $config, $serviceUrl, $adminUrl );
 	}
 
 
