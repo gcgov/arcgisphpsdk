@@ -14,6 +14,7 @@ final class config {
 		$this->setBaseUrl( $baseUrl );
 		$this->setUsername( $username );
 		$this->setPassword( $password );
+		$this->setDevelopment( $development );
 	}
 
 	public function getBaseUrl( string $append='' ): string {
