@@ -8,7 +8,6 @@ class Geometry extends jsonDeserialize {
 
 	public ?string $type = '';
 
-	/** @var array<int, float> */
 	public array $coordinates = [];
 
 

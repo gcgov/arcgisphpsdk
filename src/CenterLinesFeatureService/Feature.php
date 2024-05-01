@@ -17,4 +17,13 @@ class Feature extends \gcgov\arcgis\sdk\Feature {
 		return $this->properties;
 	}
 
+	public function getObjectId(): ?int {
+		return $this->properties->OBJECTID;
+	}
+
+
+	public function getGlobalId(): ?string {
+		return $this->properties->GlobalID;
+	}
+
 }
