@@ -18,7 +18,7 @@ class CenterLinesCulvertsFeatureService extends FeatureService {
 	 */
 	public function getAllFeatures( int $offset = 0, int $featuresPerCall = 1000, array $centerLineFeatureCollections = [] ): array {
 		$token                          = $this->getConfig()->getToken();
-		$url                            = $this->getServiceUrl( '1/query?f=geojson&where=1%3D1&outFields=*&returnGeometry=false&resultOffset=' . $offset . '&resultRecordCount=' . $featuresPerCall . '&token=' . $token );
+		$url                            = $this->getServiceUrl( '1/query?f=geojson&where=1%3D1&outFields=*&returnGeometry=true&resultOffset=' . $offset . '&resultRecordCount=' . $featuresPerCall . '&token=' . $token );
 		$client                         = new \GuzzleHttp\Client();
 		$res                            = $client->request( 'GET', $url );
 		$centerLineFeatureCollection = \gcgov\arcgis\CenterLinesFeatureService\FeatureQuery::jsonDeserialize( $res->getBody() );
